@@ -4,6 +4,8 @@ import { CoffeeCard } from './components/CoffeeCard'
 import {
   BannerContent,
   BannerFeatures,
+  CoffeCardContainer,
+  CoffeeSection,
   HomeBanner,
   HomeContainer,
 } from './styles'
@@ -50,9 +52,9 @@ export function Home() {
           alt="Cup of coffee with a yellow background with coffee beans, leaves, and coffee powder"
         />
       </HomeBanner>
-      <div>
+      <CoffeeSection>
         <strong>Our coffee</strong>
-        <div>
+        <CoffeCardContainer>
           <CoffeeCard />
           <CoffeeCard />
           <CoffeeCard />
@@ -62,8 +64,8 @@ export function Home() {
           <CoffeeCard />
           <CoffeeCard />
           <CoffeeCard />
-        </div>
-      </div>
+        </CoffeCardContainer>
+      </CoffeeSection>
     </HomeContainer>
   )
 }

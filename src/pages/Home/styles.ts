@@ -20,7 +20,7 @@ export const HomeBanner = styled.main`
     #f1e9c9 81.75%,
     rgba(241, 233, 201, 0.34) 99.23%
   );
-  padding: 5.5rem 2rem;
+  padding: 5.5rem 0rem;
 
   img {
     max-width: 29.75rem;
@@ -138,4 +138,26 @@ export const BannerFeatures = styled.div`
       align-items: flex-start;
     }
   }
+`
+export const CoffeeSection = styled.div`
+  width: 100%;
+  padding: 5.5rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3.375rem;
+
+  strong {
+    font-family: 'Baloo 2', cursive;
+    line-height: 130%;
+    font-size: 2rem;
+    font-weight: 800;
+    color: ${(props) => props.theme['gray-700']};
+  }
+`
+
+export const CoffeCardContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 16rem);
+  justify-content: space-evenly;
+  grid-gap: 2.5rem;
 `

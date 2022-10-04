@@ -15,6 +15,9 @@ export const HeaderContainer = styled(BaseFormat)`
   align-items: center;
   width: 100%;
   padding: 2rem 0;
+  position: sticky;
+  top: 0;
+  background-color: ${(props) => props.theme['off-white']};
 `
 
 export const HeaderDetails = styled(BaseFormat)`
