@@ -7,6 +7,7 @@ export const GlobalStyle = createGlobalStyle`
         margin: 0;
         padding: 0;
         box-sizing: border-box;
+        
     }
 
     :focus{
@@ -23,5 +24,17 @@ export const GlobalStyle = createGlobalStyle`
         -webkit-font-smoothing: antialiased;
         font-weight: 400;
         background-color: ${(props) => props.theme['off-white']};
+    }
+
+    @media (max-width: 620px){
+        html{
+            font-size: 87.5%;
+        }
+    }
+
+    @media (max-width: 520px){
+        html{
+            font-size: 75%;
+        }
     }
 `

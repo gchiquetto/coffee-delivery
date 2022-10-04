@@ -1,5 +1,5 @@
 import { HeaderContainer, HeaderDetails } from './styles'
-import { MapPin, ShoppingCartSimple } from 'phosphor-react'
+import { MapPin, ShoppingCart } from 'phosphor-react'
 import coffeeLogo from './../../assets/logo-coffee-delivery.svg'
 
 export function Header() {
@@ -17,7 +17,7 @@ export function Header() {
           Enschede, Netherlands
         </span>
         <a href="">
-          <ShoppingCartSimple size={22} weight="fill" color="#C47F17" />
+          <ShoppingCart size={22} weight="fill" color="#C47F17" />
         </a>
       </HeaderDetails>
     </HeaderContainer>
