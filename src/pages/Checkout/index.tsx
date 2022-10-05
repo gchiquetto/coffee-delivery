@@ -1,4 +1,6 @@
 import { CheckoutCoffeeCard } from './components/CheckoutCoffeeCard'
+import { CheckoutForm } from './components/CheckoutForm'
+
 import {
   CheckoutButton,
   CheckoutContainer,
@@ -14,6 +16,7 @@ export function Checkout() {
       <form action="">
         <CheckoutFormContainer>
           <strong>Complete your order</strong>
+          <CheckoutForm />
         </CheckoutFormContainer>
         <CheckoutSummary>
           <strong>Selected coffees</strong>
@@ -23,7 +26,7 @@ export function Checkout() {
             <CheckoutSummaryContent>
               <div>
                 <p>Total of items</p>
-                <p>€ 2.00</p>
+                <p>€ 4.00</p>
               </div>
               <div>
                 <p>Delivery</p>
@@ -31,7 +34,7 @@ export function Checkout() {
               </div>
               <div>
                 <p>Total</p>
-                <p>€ 3.00</p>
+                <p>€ 5.00</p>
               </div>
             </CheckoutSummaryContent>
             <CheckoutButton type="submit">Order</CheckoutButton>

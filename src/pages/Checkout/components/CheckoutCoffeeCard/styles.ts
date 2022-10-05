@@ -11,6 +11,8 @@ export const CheckoutCoffeeCardContainer = styled.div`
   }
 
   .item-value {
+    text-align: end;
+    min-width: 3.4rem;
     margin-left: auto;
   }
 `
@@ -33,6 +35,9 @@ const Box = styled.div`
   svg {
     color: ${(props) => props.theme.purple};
     font-size: 0.875rem;
+    &:hover {
+      color: ${(props) => props.theme['purple-dark']};
+    }
   }
 `
 

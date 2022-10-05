@@ -13,6 +13,7 @@ export const CheckoutContainer = styled.div`
 
   form {
     display: flex;
+    flex-wrap: wrap;
     gap: 2rem;
   }
 `
@@ -35,6 +36,14 @@ export const CheckoutSummaryContainer = styled.div`
   flex-direction: column;
   gap: 1.5rem;
   padding: 2.5rem;
+
+  @media (max-width: 434px) {
+    padding: 1.5rem;
+  }
+
+  @media (max-width: 390px) {
+    padding: 1rem;
+  }
 `
 export const CheckoutSummaryContent = styled.div`
   display: flex;

@@ -85,6 +85,10 @@ export const CoffeeCardFooter = styled.div`
       width: 0.875rem;
       height: 0.875rem;
       background-color: transparent;
+
+      &:hover {
+        color: ${(props) => props.theme['purple-dark']};
+      }
     }
 
     span {
@@ -93,11 +97,17 @@ export const CoffeeCardFooter = styled.div`
       color: ${(props) => props.theme['gray-800']};
     }
   }
+
   & .shopping-cart {
+    display: flex;
     padding: 0.5rem;
     background-color: ${(props) => props.theme['purple-dark']};
     color: ${(props) => props.theme['gray-100']};
     border: 0;
     border-radius: 6px;
+
+    &:hover {
+      background-color: ${(props) => props.theme.purple};
+    }
   }
 `

@@ -21,7 +21,7 @@ export const GlobalStyle = createGlobalStyle`
         background-color: ${(props) => props.theme['off-white']};
     }
 
-    button{
+    button, span{
         transition: all .2s ease;
     }
 
