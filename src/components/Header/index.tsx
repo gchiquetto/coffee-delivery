@@ -16,7 +16,7 @@ export function Header() {
           <MapPin size={22} weight="fill" color="#8047F8" />
           Enschede, Netherlands
         </span>
-        <a href="">
+        <a href="/checkout">
           <ShoppingCart size={22} weight="fill" color="#C47F17" />
         </a>
       </HeaderDetails>

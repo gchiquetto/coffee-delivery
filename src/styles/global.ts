@@ -21,6 +21,10 @@ export const GlobalStyle = createGlobalStyle`
         background-color: ${(props) => props.theme['off-white']};
     }
 
+    button{
+        transition: all .2s ease;
+    }
+
     @media (max-width: 620px){
         html{
             font-size: 87.5%;
