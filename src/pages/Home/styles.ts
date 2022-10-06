@@ -11,7 +11,7 @@ export const HomeBanner = styled.main`
   display: flex;
   align-items: flex-start;
   gap: 1rem;
-  justify-content: space-between;
+  justify-content: center;
   width: 100%;
   background: linear-gradient(
     90.64deg,
