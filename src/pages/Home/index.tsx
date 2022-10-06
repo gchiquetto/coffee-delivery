@@ -10,7 +10,18 @@ import {
   HomeContainer,
 } from './styles'
 
+import { useContext } from 'react'
+import { CoffeeData, CoffeesContext } from '../../contexts/CoffeesContext'
+
 export function Home() {
+  const { COFFEES } = useContext(CoffeesContext)
+  //   const [selectedCoffees, setSelectedCoffes] = useState<SelectedCoffee[]>([])
+
+  //   function updateSelectedCoffees(selectedCoffee: SelectedCoffee) {
+  //     setSelectedCoffes((state) => [...state, selectedCoffee])
+  //     console.log(selectedCoffees)
+  //   }
+
   return (
     <HomeContainer>
       <HomeBanner>
@@ -55,15 +66,9 @@ export function Home() {
       <CoffeeSection>
         <strong>Our coffee</strong>
         <CoffeCardContainer>
-          <CoffeeCard />
-          <CoffeeCard />
-          <CoffeeCard />
-          <CoffeeCard />
-          <CoffeeCard />
-          <CoffeeCard />
-          <CoffeeCard />
-          <CoffeeCard />
-          <CoffeeCard />
+          {COFFEES.map((coffee: CoffeeData) => (
+            <CoffeeCard key={coffee.id} data={coffee} />
+          ))}
         </CoffeCardContainer>
       </CoffeeSection>
     </HomeContainer>

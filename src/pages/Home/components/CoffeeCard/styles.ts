@@ -6,6 +6,17 @@ export const CoffeeCardContainer = styled.div`
   gap: 1rem;
   align-items: center;
   padding: 1rem;
+  border-radius: 6px 36px;
+  background-color: ${(props) => props.theme['gray-100']};
+  height: 19.375rem;
+
+  img {
+    margin-top: -2.125rem;
+  }
+
+  @media (max-width: 620px) {
+    height: 22rem;
+  }
 
   h3 {
     font-family: 'Baloo 2', cursive;
@@ -22,14 +33,17 @@ export const CoffeeCardContainer = styled.div`
     color: ${(props) => props.theme['gray-500']};
     text-align: center;
   }
+
+  .category_container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+  }
 `
 
 export const CoffeeTypesContainer = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.25rem;
-
   span {
     color: ${(props) => props.theme['yellow-dark']};
     text-transform: uppercase;
@@ -46,6 +60,7 @@ export const CoffeeCardFooter = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-top: auto;
 
   button {
     cursor: pointer;
@@ -108,6 +123,11 @@ export const CoffeeCardFooter = styled.div`
 
     &:hover {
       background-color: ${(props) => props.theme.purple};
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
     }
   }
 `

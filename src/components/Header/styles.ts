@@ -40,4 +40,29 @@ export const HeaderDetails = styled(BaseFormat)`
     padding: 0.5rem;
     background-color: ${(props) => props.theme['yellow-light']};
   }
+
+  .cart-button {
+    position: relative;
+  }
+`
+
+export const QuantityContainer = styled.div`
+  position: absolute;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 50%;
+  right: -8.35px;
+  top: -8px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: ${(props) => props.theme['yellow-dark']};
+
+  p {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: -6%;
+    color: ${(props) => props.theme.white};
+  }
 `
