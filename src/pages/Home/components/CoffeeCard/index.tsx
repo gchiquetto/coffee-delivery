@@ -17,7 +17,7 @@ interface CoffeeProps {
 }
 
 export function CoffeeCard({ data }: CoffeeProps) {
-  const { updateSelectedCoffees } = useContext(CoffeesContext)
+  const { updateSelectedCoffees, formatValue } = useContext(CoffeesContext)
   const [quantityCoffe, setquantityCoffe] = useState(0)
   const disabledButton = !(quantityCoffe > 0)
 
@@ -30,7 +30,7 @@ export function CoffeeCard({ data }: CoffeeProps) {
     })
   }
 
-  function handleSelectedCoffe() {
+  function handleSelectedCoffee() {
     const selectedCoffee = {
       id: data.id,
       name: data.name,
@@ -38,12 +38,12 @@ export function CoffeeCard({ data }: CoffeeProps) {
       price: data.price,
       quantity: quantityCoffe,
     }
-    updateSelectedCoffees(selectedCoffee)
+    updateSelectedCoffees(selectedCoffee, 'add')
   }
 
-  const formattedPrice = Number.isInteger(data.price)
-    ? data.price.toString() + '.00'
-    : data.price.toString().padEnd(4, '0')
+  formatValue(data.price)
+
+  const formattedPrice = formatValue(data.price)
 
   return (
     <CoffeeCardContainer>
@@ -74,7 +74,7 @@ export function CoffeeCard({ data }: CoffeeProps) {
             </button>
           </div>
           <button
-            onClick={handleSelectedCoffe}
+            onClick={handleSelectedCoffee}
             disabled={disabledButton}
             className="shopping-cart"
           >

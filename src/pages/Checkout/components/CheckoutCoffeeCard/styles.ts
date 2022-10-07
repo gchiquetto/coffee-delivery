@@ -55,6 +55,10 @@ export const QuantityBox = styled(Box)`
     cursor: pointer;
   }
 
+  div {
+    cursor: pointer;
+  }
+
   span {
     font-size: 1rem;
     line-height: 130%;

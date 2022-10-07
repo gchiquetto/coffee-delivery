@@ -15,13 +15,6 @@ import { CoffeeData, CoffeesContext } from '../../contexts/CoffeesContext'
 
 export function Home() {
   const { COFFEES } = useContext(CoffeesContext)
-  //   const [selectedCoffees, setSelectedCoffes] = useState<SelectedCoffee[]>([])
-
-  //   function updateSelectedCoffees(selectedCoffee: SelectedCoffee) {
-  //     setSelectedCoffes((state) => [...state, selectedCoffee])
-  //     console.log(selectedCoffees)
-  //   }
-
   return (
     <HomeContainer>
       <HomeBanner>

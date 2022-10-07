@@ -25,7 +25,12 @@ export interface SelectedCoffee {
 interface CoffeesContextType {
   COFFEES: CoffeeData[]
   selectedCoffees: SelectedCoffee[]
-  updateSelectedCoffees: (selectedCoffee: SelectedCoffee) => void
+  updateSelectedCoffees: (
+    selectedCoffee: SelectedCoffee,
+    operation: 'add' | 'update',
+  ) => void
+  deleteSelectedCoffee: (selectedCoffee: SelectedCoffee) => void
+  formatValue: (price: number) => string
 }
 
 export const CoffeesContext = createContext({} as CoffeesContextType)
@@ -41,7 +46,7 @@ export function CoffeesContextProvider({
       '@coffee-delivery:coffees-selected-1.0.0',
     )
     if (storedStateJSON) {
-      console.log(storedStateJSON)
+      // console.log(storedStateJSON)
       const selectedCoffesStored = JSON.parse(storedStateJSON)
       return setSelectedCoffes([...selectedCoffesStored])
     } else {
@@ -49,7 +54,6 @@ export function CoffeesContextProvider({
     }
   }, [])
 
-  console.log(selectedCoffees)
   useEffect(() => {
     if (selectedCoffees.length > 0) {
       const stateJSON = JSON.stringify(selectedCoffees)
@@ -57,7 +61,10 @@ export function CoffeesContextProvider({
     }
   }, [selectedCoffees])
 
-  function updateSelectedCoffees(selectedCoffee: SelectedCoffee) {
+  function updateSelectedCoffees(
+    selectedCoffee: SelectedCoffee,
+    operation: 'add' | 'update',
+  ) {
     if (selectedCoffees.length > 0) {
       const doesSelectedCoffeeAlreadyExists = selectedCoffees.find(
         (e) => e.id === selectedCoffee.id,
@@ -66,13 +73,17 @@ export function CoffeesContextProvider({
         const notChangedSelectedCoffees = selectedCoffees.filter(
           (coffee) => coffee.id !== selectedCoffee.id,
         )
+        const newQuantity =
+          operation === 'update'
+            ? selectedCoffee.quantity
+            : selectedCoffee.quantity + doesSelectedCoffeeAlreadyExists.quantity
+
         const newCoffee = {
           id: selectedCoffee.id,
           name: selectedCoffee.name,
           img: selectedCoffee.img,
           price: selectedCoffee.price,
-          quantity:
-            selectedCoffee.quantity + doesSelectedCoffeeAlreadyExists.quantity,
+          quantity: newQuantity,
         }
         setSelectedCoffes([...notChangedSelectedCoffees, newCoffee])
       } else {
@@ -83,9 +94,30 @@ export function CoffeesContextProvider({
     }
   }
 
+  function deleteSelectedCoffee(selectedCoffee: SelectedCoffee) {
+    const notChangedSelectedCoffees = selectedCoffees.filter(
+      (coffee) => coffee.id !== selectedCoffee.id,
+    )
+    setSelectedCoffes([...notChangedSelectedCoffees])
+  }
+
+  function formatValue(price: number) {
+    return Number.isInteger(price)
+      ? price.toString() + '.00'
+      : price > 10
+      ? price.toString().padEnd(5, '0')
+      : price.toString().padEnd(4, '0')
+  }
+
   return (
     <CoffeesContext.Provider
-      value={{ COFFEES, selectedCoffees, updateSelectedCoffees }}
+      value={{
+        COFFEES,
+        selectedCoffees,
+        updateSelectedCoffees,
+        deleteSelectedCoffee,
+        formatValue,
+      }}
     >
       {children}
     </CoffeesContext.Provider>

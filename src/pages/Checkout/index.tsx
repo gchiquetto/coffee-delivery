@@ -1,3 +1,5 @@
+import { useContext } from 'react'
+import { CoffeesContext } from '../../contexts/CoffeesContext'
 import { CheckoutCoffeeCard } from './components/CheckoutCoffeeCard'
 import { CheckoutForm } from './components/CheckoutForm'
 
@@ -11,6 +13,14 @@ import {
 } from './styles'
 
 export function Checkout() {
+  const { selectedCoffees, formatValue } = useContext(CoffeesContext)
+  const valuesArray = selectedCoffees.map(
+    (coffee) => coffee.price * coffee.quantity,
+  )
+  const totalItems = valuesArray.reduce((prev, curr) => prev + curr, 0)
+  const formattedPrice = formatValue(totalItems)
+  const formattedTotal = totalItems > 0 ? formatValue(totalItems + 1) : '0.00'
+
   return (
     <CheckoutContainer>
       <form action="">
@@ -21,20 +31,21 @@ export function Checkout() {
         <CheckoutSummary>
           <strong>Selected coffees</strong>
           <CheckoutSummaryContainer>
-            <CheckoutCoffeeCard />
-            <CheckoutCoffeeCard />
+            {selectedCoffees.map((coffee) => {
+              return <CheckoutCoffeeCard data={coffee} key={coffee.id} />
+            })}
             <CheckoutSummaryContent>
               <div>
                 <p>Total of items</p>
-                <p>€ 4.00</p>
+                <p>€ {formattedPrice}</p>
               </div>
               <div>
                 <p>Delivery</p>
-                <p>€ 1.00</p>
+                <p>€ {totalItems > 0 ? '1.00' : '0.00'}</p>
               </div>
               <div>
                 <p>Total</p>
-                <p>€ 5.00</p>
+                <p>€ {formattedTotal}</p>
               </div>
             </CheckoutSummaryContent>
             <CheckoutButton type="submit">Order</CheckoutButton>

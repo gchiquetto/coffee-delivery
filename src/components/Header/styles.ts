@@ -18,6 +18,7 @@ export const HeaderContainer = styled(BaseFormat)`
   position: sticky;
   top: 0;
   background-color: ${(props) => props.theme['off-white']};
+  z-index: 1;
 `
 
 export const HeaderDetails = styled(BaseFormat)`

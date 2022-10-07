@@ -1,5 +1,6 @@
 import { Trash, Minus, Plus } from 'phosphor-react'
-import coffeeEspresso from '../../../../assets/coffee-espresso.png'
+import { useContext, useEffect, useState } from 'react'
+import { CoffeesContext } from '../../../../contexts/CoffeesContext'
 import {
   BoxDefault,
   CheckoutCardCTA,
@@ -8,29 +9,72 @@ import {
   QuantityBox,
 } from './styles'
 
-export function CheckoutCoffeeCard() {
+interface SelectedCoffeeData {
+  data: {
+    id: number
+    name: string
+    img: string
+    price: number
+    quantity: number
+  }
+}
+
+export function CheckoutCoffeeCard({ data }: SelectedCoffeeData) {
+  const { updateSelectedCoffees, deleteSelectedCoffee, formatValue } =
+    useContext(CoffeesContext)
+  const [quantity, setQuantity] = useState(data.quantity)
+
+  function handleQuantity(operation: 'sum' | 'subtraction') {
+    setQuantity((state) => {
+      if (operation === 'subtraction') {
+        return state > 0 ? state - 1 : 0
+      }
+      return state + 1
+    })
+  }
+
+  function handleDeleteCoffee() {
+    deleteSelectedCoffee(data)
+  }
+
+  useEffect(() => {
+    const selectedCoffee = {
+      id: data.id,
+      name: data.name,
+      img: data.img,
+      price: data.price,
+      quantity,
+    }
+    quantity === 0
+      ? deleteSelectedCoffee(selectedCoffee)
+      : updateSelectedCoffees(selectedCoffee, 'update')
+  }, [quantity])
+
+  const totalValueOfItem = data.price * quantity
+  const formattedPrice = formatValue(totalValueOfItem)
+
   return (
     <CheckoutCoffeeCardContainer>
-      <img src={coffeeEspresso} alt="Cup of traditional espresso" />
+      <img src={data.img} alt={`Cup of ${data.name}`} />
       <CheckoutCardData>
-        <p>Traditional espresso</p>
+        <p>{data.name}</p>
         <CheckoutCardCTA>
           <QuantityBox>
-            <button>
+            <div onClick={() => handleQuantity('subtraction')}>
               <Minus />
-            </button>
-            <span>1</span>
-            <button>
+            </div>
+            <span>{quantity}</span>
+            <div onClick={() => handleQuantity('sum')}>
               <Plus />
-            </button>
+            </div>
           </QuantityBox>
-          <BoxDefault>
+          <BoxDefault onClick={handleDeleteCoffee}>
             <Trash />
             Delete
           </BoxDefault>
         </CheckoutCardCTA>
       </CheckoutCardData>
-      <span className="item-value">€ 2.00</span>
+      <span className="item-value">€ {formattedPrice}</span>
     </CheckoutCoffeeCardContainer>
   )
 }
