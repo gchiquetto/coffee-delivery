@@ -50,6 +50,7 @@ export function CoffeesContextProvider({
       const selectedCoffesStored = JSON.parse(storedStateJSON)
       return setSelectedCoffes([...selectedCoffesStored])
     } else {
+      console.log('test')
       setSelectedCoffes([])
     }
   }, [])
@@ -90,7 +91,7 @@ export function CoffeesContextProvider({
         setSelectedCoffes((state) => [...state, selectedCoffee])
       }
     } else {
-      setSelectedCoffes((state) => [...state, selectedCoffee])
+      setSelectedCoffes([selectedCoffee])
     }
   }
 
@@ -98,6 +99,8 @@ export function CoffeesContextProvider({
     const notChangedSelectedCoffees = selectedCoffees.filter(
       (coffee) => coffee.id !== selectedCoffee.id,
     )
+    notChangedSelectedCoffees.length === 0 &&
+      localStorage.removeItem('@coffee-delivery:coffees-selected-1.0.0')
     setSelectedCoffes([...notChangedSelectedCoffees])
   }
 

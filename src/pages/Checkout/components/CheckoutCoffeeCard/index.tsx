@@ -46,7 +46,7 @@ export function CheckoutCoffeeCard({ data }: SelectedCoffeeData) {
       quantity,
     }
     quantity === 0
-      ? deleteSelectedCoffee(selectedCoffee)
+      ? deleteSelectedCoffee(data)
       : updateSelectedCoffees(selectedCoffee, 'update')
   }, [quantity])
 
