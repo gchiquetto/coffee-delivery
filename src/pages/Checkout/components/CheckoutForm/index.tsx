@@ -4,7 +4,6 @@ import {
   CheckoutFormData,
   CheckoutFormPaymentContainer,
   CheckoutInformationCard,
-  PaymentOption,
   PaymentOptionsContainer,
 } from './styles'
 import {
@@ -14,8 +13,11 @@ import {
   MapPinLine,
   Money,
 } from 'phosphor-react'
+import { useFormContext } from 'react-hook-form'
 
 export function CheckoutForm() {
+  const { register } = useFormContext()
+
   return (
     <CheckoutFormContainerContent>
       <CheckoutFormAddressContainer>
@@ -32,12 +34,14 @@ export function CheckoutForm() {
             className="input_md"
             id="postcode"
             placeholder="Postcode"
+            {...register('postcode')}
           />
           <input
             type="text"
             className="input_1f"
-            id="address"
+            id="streetName"
             placeholder="Street name"
+            {...register('streetName')}
           />
           <div>
             <input
@@ -45,12 +49,14 @@ export function CheckoutForm() {
               className="input_md"
               id="number"
               placeholder="Address Number"
+              {...register('number', { valueAsNumber: true })}
             />
             <input
               type="text"
               className="input_1f"
               id="complement"
               placeholder="Address Complement(optional)"
+              {...register('complement')}
             />
           </div>
           <div>
@@ -59,12 +65,14 @@ export function CheckoutForm() {
               className="input_md"
               id="district"
               placeholder="District"
+              {...register('district')}
             />
             <input
               type="text"
               className="input_1f"
               id="city"
               placeholder="City"
+              {...register('city')}
             />
             <input
               type="text"
@@ -72,6 +80,7 @@ export function CheckoutForm() {
               id="state"
               placeholder="State"
               max={2}
+              {...register('state')}
             />
           </div>
         </CheckoutFormData>
@@ -91,8 +100,8 @@ export function CheckoutForm() {
           <input
             type="radio"
             id="credit_card"
-            name="payments"
-            value="credit_card"
+            value="Credit Card"
+            {...register('payment')}
           />
           <label htmlFor="credit_card">
             <CreditCard size={16} />
@@ -101,14 +110,19 @@ export function CheckoutForm() {
           <input
             type="radio"
             id="debit_card"
-            name="payments"
-            value="debit_card"
+            value="Debit Card"
+            {...register('payment')}
           />
           <label htmlFor="debit_card">
             <Bank size={16} />
             Debit Card
           </label>
-          <input type="radio" id="money" name="payments" value="money" />
+          <input
+            type="radio"
+            id="money"
+            value="Money"
+            {...register('payment')}
+          />
           <label htmlFor="money">
             <Money size={16} />
             Money

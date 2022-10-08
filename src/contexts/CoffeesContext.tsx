@@ -1,4 +1,5 @@
 import { createContext, ReactNode, useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { COFFEES } from '../utils/coffees'
 
 interface CoffeesContextProviderProps {
@@ -22,14 +23,27 @@ export interface SelectedCoffee {
   quantity: number
 }
 
+export interface Address {
+  postcode: string
+  streetName: string
+  number: number
+  complement: string
+  district: string
+  city: string
+  state: string
+  payment: string
+}
+
 interface CoffeesContextType {
   COFFEES: CoffeeData[]
   selectedCoffees: SelectedCoffee[]
+  address: Address
   updateSelectedCoffees: (
     selectedCoffee: SelectedCoffee,
     operation: 'add' | 'update',
   ) => void
   deleteSelectedCoffee: (selectedCoffee: SelectedCoffee) => void
+  setAddressData: (addressData: Address) => void
   formatValue: (price: number) => string
 }
 
@@ -39,6 +53,8 @@ export function CoffeesContextProvider({
   children,
 }: CoffeesContextProviderProps) {
   const [selectedCoffees, setSelectedCoffes] = useState<SelectedCoffee[]>([])
+  const [address, setAddress] = useState({} as Address)
+  const navigate = useNavigate()
 
   // Check only on the first render if there is data on localStorage, if so, setSelectedCoffees
   useEffect(() => {
@@ -46,11 +62,9 @@ export function CoffeesContextProvider({
       '@coffee-delivery:coffees-selected-1.0.0',
     )
     if (storedStateJSON) {
-      // console.log(storedStateJSON)
       const selectedCoffesStored = JSON.parse(storedStateJSON)
       return setSelectedCoffes([...selectedCoffesStored])
     } else {
-      console.log('test')
       setSelectedCoffes([])
     }
   }, [])
@@ -104,6 +118,13 @@ export function CoffeesContextProvider({
     setSelectedCoffes([...notChangedSelectedCoffees])
   }
 
+  function setAddressData(addressData: Address) {
+    setAddress(addressData)
+    navigate('/success')
+    setSelectedCoffes([])
+    localStorage.removeItem('@coffee-delivery:coffees-selected-1.0.0')
+  }
+
   function formatValue(price: number) {
     return Number.isInteger(price)
       ? price.toString() + '.00'
@@ -117,8 +138,10 @@ export function CoffeesContextProvider({
       value={{
         COFFEES,
         selectedCoffees,
+        address,
         updateSelectedCoffees,
         deleteSelectedCoffee,
+        setAddressData,
         formatValue,
       }}
     >

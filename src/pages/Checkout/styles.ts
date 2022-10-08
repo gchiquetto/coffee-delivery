@@ -88,4 +88,9 @@ export const CheckoutButton = styled.button`
   &:hover {
     background-color: ${(props) => props.theme['yellow-dark']};
   }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
 `

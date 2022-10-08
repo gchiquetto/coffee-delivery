@@ -1,5 +1,7 @@
 import { CurrencyDollar, MapPin, Timer } from 'phosphor-react'
+import { useContext } from 'react'
 import checkoutIllustration from '../../assets/checkout-illustration.png'
+import { CoffeesContext } from '../../contexts/CoffeesContext'
 import {
   DeliveryTimeInformation,
   LocalInformation,
@@ -10,6 +12,9 @@ import {
 } from './styles'
 
 export function Success() {
+  const { address } = useContext(CoffeesContext)
+  console.log(address)
+
   return (
     <SuccessContainer>
       <SuccessContent>
@@ -25,9 +30,12 @@ export function Success() {
               </div>
               <div>
                 <p>
-                  Delivery on <strong>Maanstraat 24</strong>
+                  Delivery on{' '}
+                  <strong>
+                    {address.streetName}, {address.number}
+                  </strong>
                 </p>
-                <span>Enschede, Netherlands</span>
+                <span>{address.city}</span>
               </div>
             </LocalInformation>
             <DeliveryTimeInformation>
@@ -45,7 +53,7 @@ export function Success() {
               </div>
               <div>
                 <p>Payment on delivery</p>
-                <strong>Credit card</strong>
+                <strong>{address.payment}</strong>
               </div>
             </PaymentInformation>
           </OrderInformationContainer>
