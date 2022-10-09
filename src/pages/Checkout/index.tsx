@@ -14,7 +14,6 @@ import {
   CheckoutSummaryContainer,
   CheckoutSummaryContent,
 } from './styles'
-import { NavLink } from 'react-router-dom'
 
 const CheckoutValidationSchema = zod.object({
   postcode: zod.string().min(1, 'Please enter with your postcode'),

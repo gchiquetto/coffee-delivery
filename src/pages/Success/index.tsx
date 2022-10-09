@@ -13,7 +13,6 @@ import {
 
 export function Success() {
   const { address } = useContext(CoffeesContext)
-  console.log(address)
 
   return (
     <SuccessContainer>
